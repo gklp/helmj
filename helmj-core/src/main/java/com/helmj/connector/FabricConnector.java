@@ -12,6 +12,7 @@ import io.fabric8.kubernetes.client.dsl.Listable;
 import io.fabric8.kubernetes.client.dsl.base.OperationSupport;
 import io.fabric8.kubernetes.client.dsl.internal.PortForwarderWebsocket;
 import okhttp3.OkHttpClient;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -55,38 +56,34 @@ public class FabricConnector extends AbstractHelmJConnector<FabricConnectorConfi
 			if (pods != null) {
 				String namespaceUrl = ((OperationSupport) pods).getNamespacedUrl().toExternalForm();
 
-				logger.info("The url of api is calculated as [" + namespaceUrl + "]");
+				logger.info("The url of api : [" + namespaceUrl + "]");
 
-				if (namespaceUrl != null && !namespaceUrl.isEmpty()) {
+				if (namespaceUrl != null) {
 					final List<Pod> podList = pods.list().getItems();
-					return buildLocalPortForward(httpClient, namespaceUrl, podList);
+					if (CollectionUtils.isNotEmpty(podList)) {
+						String tillerPodName = podList.get(0).getMetadata().getName();
+
+						String urlBuilder = namespaceUrl
+								+ "/"
+								+ tillerPodName;
+
+						logger.info("Pod is alive as [" + tillerPodName + "]");
+
+						final URL url = new URL(urlBuilder);
+						this.forward = new PortForwarderWebsocket(httpClient).forward(url, tillerConfig.getPort());
+
+						return SocketForwarderConnection.builder().
+								inetAddress(this.forward.getLocalAddress())
+								.localPort(this.forward.getLocalPort())
+								.build();
+					}
+					throw new HelmJTillerException("Helmj didn't find a tiller in kubernetes.");
 				}
 			}
 		} catch (MalformedURLException e) {
 			KubernetesClientException.launderThrowable(e);
 		}
 		return null;
-	}
-
-	private SocketForwarderConnection buildLocalPortForward(OkHttpClient httpClient, String namespaceUrl,
-			List<Pod> podList) throws MalformedURLException {
-
-		if (podList == null || podList.isEmpty()) {
-			throw new HelmJTillerException("Helmj didn't find a tiller in kubernetes.");
-		}
-		String tillerName = podList.get(0).getMetadata().getName();
-
-		logger.info("Pod is alive as [" + tillerName + "]");
-
-		final URL url = new URL(ConnectorUtil.toConcatWith(namespaceUrl, tillerName, ConnectorUtil.SLASH));
-		this.forward = new PortForwarderWebsocket(httpClient).forward(url, tillerConfig.getPort());
-
-		logger.info("PortForwarderWebsocket is established.");
-
-		return SocketForwarderConnection.builder().
-				inetAddress(this.forward.getLocalAddress())
-				.localPort(this.forward.getLocalPort())
-				.build();
 	}
 
 }
