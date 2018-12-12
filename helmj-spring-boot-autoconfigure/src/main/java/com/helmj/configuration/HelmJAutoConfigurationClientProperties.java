@@ -24,4 +24,5 @@ public class HelmJAutoConfigurationClientProperties {
 	public void setClientType(String clientType) {
 		this.clientType = clientType;
 	}
+
 }

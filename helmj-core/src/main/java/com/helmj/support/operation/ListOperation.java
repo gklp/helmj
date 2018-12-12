@@ -42,4 +42,5 @@ public class ListOperation implements Operation<RequestListRelease, ResponseRele
 		}
 		return ResponseReleaseList.builder().releaseList(result).build();
 	}
+
 }

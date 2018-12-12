@@ -30,4 +30,5 @@ public abstract class AbstractHelmJConnector<C extends AbstractConnectorConfig> 
 	public void setclusterWith(ClusterWith clusterWith) {
 		this.clusterWith = clusterWith;
 	}
+	
 }

@@ -46,4 +46,5 @@ public class HelmJAutoConfigurationTillerProperties {
 	public void setPort(Integer port) {
 		this.port = port;
 	}
+
 }

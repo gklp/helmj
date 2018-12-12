@@ -19,4 +19,5 @@ public class MultipleBlockingClientStub extends AbstractMultipleHelmJClient {
 	public OperationProvider clusterWith(ClusterWith clusterWith) {
 		return OperationProvider.newOperation(newImmutableClient(clusterWith));
 	}
+
 }
