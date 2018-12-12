@@ -1,6 +1,6 @@
 package com.helmj.connector;
 
-import com.helmj.TillerException;
+import com.helmj.HelmJTillerException;
 import com.helmj.connector.config.FabricConnectorConfig;
 import com.helmj.connector.config.SocketForwarderConnection;
 import io.fabric8.kubernetes.api.model.Pod;
@@ -72,7 +72,7 @@ public class FabricConnector extends AbstractHelmJConnector<FabricConnectorConfi
 			List<Pod> podList) throws MalformedURLException {
 
 		if (podList == null || podList.isEmpty()) {
-			throw new TillerException("Helmj didn't find a tiller in kubernetes.");
+			throw new HelmJTillerException("Helmj didn't find a tiller in kubernetes.");
 		}
 		String tillerName = podList.get(0).getMetadata().getName();
 
