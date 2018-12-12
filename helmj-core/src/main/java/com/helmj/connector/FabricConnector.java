@@ -54,16 +54,16 @@ public class FabricConnector extends AbstractHelmJConnector<FabricConnectorConfi
 					.withLabels(tillerConfig.getLabels());
 
 			if (pods != null) {
-				String namespaceUrl = ((OperationSupport) pods).getNamespacedUrl().toExternalForm();
+				String clusterApiUrl = ((OperationSupport) pods).getNamespacedUrl().toExternalForm();
 
-				logger.info("The url of api : [" + namespaceUrl + "]");
+				logger.info("The url of api : [" + clusterApiUrl + "]");
 
-				if (namespaceUrl != null) {
+				if (clusterApiUrl != null) {
 					final List<Pod> podList = pods.list().getItems();
 					if (CollectionUtils.isNotEmpty(podList)) {
 						String tillerPodName = podList.get(0).getMetadata().getName();
 
-						String urlBuilder = namespaceUrl
+						String urlBuilder = clusterApiUrl
 								+ "/"
 								+ tillerPodName;
 
