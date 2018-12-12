@@ -1,4 +1,4 @@
-package com.helmj;
+package org.helmj;
 
 import org.junit.Test;
 
