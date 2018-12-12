@@ -9,22 +9,22 @@ import lombok.Getter;
 @Getter
 public class FabricConnectorConfig extends AbstractConnectorConfig<Config> {
 
-	private FabricConnectorConfig(ClusterWith clientWith) {
-		super(clientWith);
+	private FabricConnectorConfig(ClusterWith clusterWith) {
+		super(clusterWith);
 	}
 
 	@Builder(builderMethodName = "fabricBuilder")
-	public static FabricConnectorConfig newFabricConfig(ClusterWith clientWith) {
-		return new FabricConnectorConfig(clientWith);
+	public static FabricConnectorConfig newFabricConfig(ClusterWith clusterWith) {
+		return new FabricConnectorConfig(clusterWith);
 	}
 
 	@Override
 	public Config getConfig() {
 		return new ConfigBuilder()
-				.withMasterUrl(super.clientWith.withMasterUrl())
-				.withUsername(super.clientWith.withUsername())
-				.withPassword(super.clientWith.withPassword())
-				.withHttpsProxy(super.clientWith.withHttpsProxy())
+				.withMasterUrl(super.clusterWith.withMasterUrl())
+				.withUsername(super.clusterWith.withUsername())
+				.withPassword(super.clusterWith.withPassword())
+				.withHttpsProxy(super.clusterWith.withHttpsProxy())
 				.build();
 	}
 

@@ -29,7 +29,7 @@ public class FabricConnector extends AbstractHelmJConnector<FabricConnectorConfi
 
 	@Override
 	public FabricConnectorConfig getConfiguration() {
-		return FabricConnectorConfig.newFabricConfig(this.clientWith);
+		return FabricConnectorConfig.newFabricConfig(this.clusterWith);
 	}
 
 	@Override

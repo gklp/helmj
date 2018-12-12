@@ -36,15 +36,15 @@ abstract class AbstractMultipleHelmJClient implements HelmJMultipleClient {
 		}
 	}
 
-	HelmJTiller newImmutableClient(ClusterWith clientWith) {
+	HelmJTiller newImmutableClient(ClusterWith clusterWith) {
 		Objects.requireNonNull(tillerConfig, "TillerConfig config is required.");
 		Objects.requireNonNull(clientConfig, "ClientConfig config is required.");
 
-		Objects.requireNonNull(clientWith, "ClusterWith is required.");
+		Objects.requireNonNull(clusterWith, "ClusterWith is required.");
 
 		AbstractHelmJConnector connector = ConnectorSupplier.getFabricConnector(this.clientConfig);
 		connector.setTillerConfig(this.tillerConfig);
-		connector.setClientWith(clientWith);
+		connector.setclusterWith(clusterWith);
 
 		return new HelmJTiller(connector);
 	}

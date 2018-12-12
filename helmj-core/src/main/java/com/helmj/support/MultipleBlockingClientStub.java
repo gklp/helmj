@@ -16,7 +16,7 @@ public class MultipleBlockingClientStub extends AbstractMultipleHelmJClient {
 	}
 
 	@Override
-	public OperationProvider clusterWith(ClusterWith clientWith) {
-		return OperationProvider.newOperation(newImmutableClient(clientWith));
+	public OperationProvider clusterWith(ClusterWith clusterWith) {
+		return OperationProvider.newOperation(newImmutableClient(clusterWith));
 	}
 }

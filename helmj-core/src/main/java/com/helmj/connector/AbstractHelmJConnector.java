@@ -11,7 +11,7 @@ public abstract class AbstractHelmJConnector<C extends AbstractConnectorConfig> 
 
 	TillerConfig tillerConfig;
 
-	ClusterWith clientWith;
+	ClusterWith clusterWith;
 
 	public abstract SocketForwarderConnection openConnection();
 
@@ -27,7 +27,7 @@ public abstract class AbstractHelmJConnector<C extends AbstractConnectorConfig> 
 		this.tillerConfig = tillerConfig;
 	}
 
-	public void setClientWith(ClusterWith clientWith) {
-		this.clientWith = clientWith;
+	public void setclusterWith(ClusterWith clusterWith) {
+		this.clusterWith = clusterWith;
 	}
 }
