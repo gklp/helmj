@@ -19,6 +19,7 @@ public class DeleteOperation implements Operation<RequestDeleteRelease, Response
 	public ResponseDeleteRelease execute(RequestDeleteRelease requestDeleteRelease) {
 		Tiller.UninstallReleaseRequest.Builder builder = Tiller.UninstallReleaseRequest.newBuilder();
 		builder.setName(requestDeleteRelease.getReleaseName());
+
 		Tiller.UninstallReleaseResponse uninstallReleaseResponse = stub.uninstallRelease(builder.build());
 		if (uninstallReleaseResponse != null) {
 			ReleaseOuterClass.Release release = uninstallReleaseResponse.getRelease();
