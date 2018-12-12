@@ -4,9 +4,9 @@ import com.helmj.HelmJClientException;
 import com.helmj.connector.AbstractHelmJConnector;
 import com.helmj.connector.ConnectorSupplier;
 import com.helmj.support.config.ClientConfig;
-import com.helmj.support.config.ClientWith;
-import com.helmj.support.config.ConfigAware;
-import com.helmj.support.config.TillerConfig;
+import com.helmj.support.config.ClusterWith;
+import com.helmj.ConfigAware;
+import com.helmj.connector.config.TillerConfig;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -37,12 +37,12 @@ abstract class AbstractMultipleHelmJClient implements HelmJMultipleClient {
 		}
 	}
 
-	HelmJTiller newImmutableClient(ClientWith clientWith) {
+	HelmJTiller newImmutableClient(ClusterWith clientWith) {
 		
 		Objects.requireNonNull(tillerConfig, "TillerConfig config is required.");
 		Objects.requireNonNull(clientConfig, "ClientConfig config is required.");
 
-		Objects.requireNonNull(clientWith, "ClientWith is required.");
+		Objects.requireNonNull(clientWith, "ClusterWith is required.");
 
 		AbstractHelmJConnector connector = ConnectorSupplier.getFabricConnector(this.clientConfig);
 		connector.setTillerConfig(this.tillerConfig);

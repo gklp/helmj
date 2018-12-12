@@ -1,17 +1,17 @@
 package com.helmj.connector.config;
 
 import com.helmj.HelmJClientException;
-import com.helmj.support.config.ClientWith;
+import com.helmj.support.config.ClusterWith;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public abstract class ConnectorConfig<T> {
+public abstract class AbstractConnectorConfig<T> {
 
-	final protected ClientWith clientWith;
+	final protected ClusterWith clientWith;
 	
 	private final Log logger = LogFactory.getLog(getClass());
 
-	ConnectorConfig(ClientWith clientWith) {
+	AbstractConnectorConfig(ClusterWith clientWith) {
 		if (clientWith.withMasterUrl() == null) {
 			throw new HelmJClientException("Master url is required.");
 		}

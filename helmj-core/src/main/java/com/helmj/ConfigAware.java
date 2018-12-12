@@ -1,4 +1,4 @@
-package com.helmj.support.config;
+package com.helmj;
 
 public interface ConfigAware {
 }

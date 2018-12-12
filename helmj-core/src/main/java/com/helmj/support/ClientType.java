@@ -3,7 +3,7 @@ package com.helmj.support;
 import java.util.EnumSet;
 
 public enum ClientType {
-	BLOCKING_CLIENT("blocking-client");
+	MULTIPLE_BLOCKING_CLIENT("multiple-blocking-client");
 
 	private String clientType;
 

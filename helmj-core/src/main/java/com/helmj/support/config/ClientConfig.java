@@ -1,5 +1,6 @@
 package com.helmj.support.config;
 
+import com.helmj.ConfigAware;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

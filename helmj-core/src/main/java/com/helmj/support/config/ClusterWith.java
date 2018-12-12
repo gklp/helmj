@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(fluent = true)
-public class ClientWith {
+public class ClusterWith {
 
 	private String withMasterUrl;
 

@@ -1,11 +1,11 @@
 package com.helmj.configuration;
 
 import com.helmj.HelmJClientException;
+import com.helmj.connector.config.TillerConfig;
+import com.helmj.support.ClientType;
 import com.helmj.support.HelmJMultipleClient;
 import com.helmj.support.MultipleBlockingClientStub;
 import com.helmj.support.config.ClientConfig;
-import com.helmj.support.config.TillerConfig;
-import com.helmj.support.ClientType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -73,10 +73,8 @@ public class HelmJAutoConfiguration {
 	@Bean(name = "helmJMultipleClient")
 	@ConditionalOnMissingBean
 	public HelmJMultipleClient getHelmJClient(TillerConfig helmjTillerConfig, ClientConfig helmjClientConfig) {
-		if (ClientType.BLOCKING_CLIENT.equals(ClientType.getType(helmjClientConfig.getClientType()))) {
-			MultipleBlockingClientStub multipleBlockingClientStub = new MultipleBlockingClientStub();
-			multipleBlockingClientStub.setConfig(helmjClientConfig, helmjTillerConfig);
-			return multipleBlockingClientStub;
+		if (ClientType.MULTIPLE_BLOCKING_CLIENT.equals(ClientType.getType(helmjClientConfig.getClientType()))) {
+			return new MultipleBlockingClientStub(helmjClientConfig, helmjTillerConfig);
 		}
 		throw new HelmJClientException("Unsupported client type : " + helmjClientConfig.getClientType());
 	}

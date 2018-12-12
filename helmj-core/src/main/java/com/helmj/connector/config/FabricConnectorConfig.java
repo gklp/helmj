@@ -1,20 +1,20 @@
 package com.helmj.connector.config;
 
-import com.helmj.support.config.ClientWith;
+import com.helmj.support.config.ClusterWith;
 import io.fabric8.kubernetes.client.Config;
 import io.fabric8.kubernetes.client.ConfigBuilder;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class FabricConnectorConfig extends ConnectorConfig<Config> {
+public class FabricConnectorConfig extends AbstractConnectorConfig<Config> {
 
-	private FabricConnectorConfig(ClientWith clientWith) {
+	private FabricConnectorConfig(ClusterWith clientWith) {
 		super(clientWith);
 	}
 
 	@Builder(builderMethodName = "fabricBuilder")
-	public static FabricConnectorConfig newFabricConfig(ClientWith clientWith) {
+	public static FabricConnectorConfig newFabricConfig(ClusterWith clientWith) {
 		return new FabricConnectorConfig(clientWith);
 	}
 

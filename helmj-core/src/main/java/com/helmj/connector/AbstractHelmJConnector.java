@@ -1,17 +1,17 @@
 package com.helmj.connector;
 
-import com.helmj.connector.config.ConnectorConfig;
-import com.helmj.support.config.TillerConfig;
+import com.helmj.connector.config.AbstractConnectorConfig;
+import com.helmj.connector.config.TillerConfig;
 import com.helmj.connector.config.SocketForwarderConnection;
-import com.helmj.support.config.ClientWith;
+import com.helmj.support.config.ClusterWith;
 
 import java.io.Closeable;
 
-public abstract class AbstractHelmJConnector<C extends ConnectorConfig> implements Closeable {
+public abstract class AbstractHelmJConnector<C extends AbstractConnectorConfig> implements Closeable {
 
 	TillerConfig tillerConfig;
 
-	ClientWith clientWith;
+	ClusterWith clientWith;
 
 	public abstract SocketForwarderConnection openSocketConnection();
 
@@ -27,7 +27,7 @@ public abstract class AbstractHelmJConnector<C extends ConnectorConfig> implemen
 		this.tillerConfig = tillerConfig;
 	}
 
-	public void setClientWith(ClientWith clientWith) {
+	public void setClientWith(ClusterWith clientWith) {
 		this.clientWith = clientWith;
 	}
 }

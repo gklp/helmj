@@ -1,8 +1,8 @@
 import com.helmj.support.HelmJMultipleClient;
 import com.helmj.support.MultipleBlockingClientStub;
 import com.helmj.support.config.ClientConfig;
-import com.helmj.support.config.ClientWith;
-import com.helmj.support.config.TillerConfig;
+import com.helmj.support.config.ClusterWith;
+import com.helmj.connector.config.TillerConfig;
 import com.helmj.support.operation.OperationProvider;
 import com.helmj.support.request.RequestVersion;
 import com.helmj.support.response.ResponseVersion;
@@ -34,14 +34,14 @@ public class Sample {
 		HelmJMultipleClient client = new MultipleBlockingClientStub(tillerConfig, clientConfig);
 
 
-		ClientWith clientWith = ClientWith.builder()
+		ClusterWith clusterWith = ClusterWith.builder()
 				.withHttpsProxy("proxy")
 				.withMasterUrl("api_link")
 				.withUsername("admin")
 				.withPassword("admin")
 				.build();
 
-		OperationProvider operationFactory = client.withClient(clientWith);
+		OperationProvider operationFactory = client.clusterWith(clusterWith);
 
 		ResponseVersion response = operationFactory.versionOperation().execute(RequestVersion.builder().build());
 		System.out.println(response.getSemVer());

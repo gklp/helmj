@@ -1,7 +1,7 @@
 package com.helmj.support;
 
-import com.helmj.support.config.ClientWith;
-import com.helmj.support.config.ConfigAware;
+import com.helmj.support.config.ClusterWith;
+import com.helmj.ConfigAware;
 import com.helmj.support.operation.OperationProvider;
 
 public class MultipleBlockingClientStub extends AbstractMultipleHelmJClient {
@@ -12,11 +12,11 @@ public class MultipleBlockingClientStub extends AbstractMultipleHelmJClient {
 
 	@Override
 	public ClientType getClientType() {
-		return ClientType.BLOCKING_CLIENT;
+		return ClientType.MULTIPLE_BLOCKING_CLIENT;
 	}
 
 	@Override
-	public OperationProvider withClient(ClientWith clientWith) {
+	public OperationProvider clusterWith(ClusterWith clientWith) {
 		return OperationProvider.newOperation(newImmutableClient(clientWith));
 	}
 }
