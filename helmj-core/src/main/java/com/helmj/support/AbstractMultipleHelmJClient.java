@@ -18,7 +18,6 @@ abstract class AbstractMultipleHelmJClient implements HelmJMultipleClient {
 	private ClientConfig clientConfig;
 
 	AbstractMultipleHelmJClient(ConfigAware... configs) {
-
 		Arrays.asList(configs).forEach(c -> {
 			if (c instanceof TillerConfig) {
 				this.tillerConfig = (TillerConfig) c;
@@ -38,7 +37,6 @@ abstract class AbstractMultipleHelmJClient implements HelmJMultipleClient {
 	}
 
 	HelmJTiller newImmutableClient(ClusterWith clientWith) {
-		
 		Objects.requireNonNull(tillerConfig, "TillerConfig config is required.");
 		Objects.requireNonNull(clientConfig, "ClientConfig config is required.");
 
