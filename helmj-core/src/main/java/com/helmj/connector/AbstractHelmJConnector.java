@@ -13,7 +13,7 @@ public abstract class AbstractHelmJConnector<C extends AbstractConnectorConfig> 
 
 	ClusterWith clientWith;
 
-	public abstract SocketForwarderConnection openSocketConnection();
+	public abstract SocketForwarderConnection openConnection();
 
 	public abstract C getConfiguration();
 

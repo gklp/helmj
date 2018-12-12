@@ -1,12 +1,12 @@
 package com.helmj.connector;
 
+import com.helmj.HelmJConnectorException;
 import com.helmj.HelmJTillerException;
 import com.helmj.connector.config.FabricConnectorConfig;
 import com.helmj.connector.config.SocketForwarderConnection;
 import io.fabric8.kubernetes.api.model.Pod;
 import io.fabric8.kubernetes.api.model.PodList;
 import io.fabric8.kubernetes.client.DefaultKubernetesClient;
-import io.fabric8.kubernetes.client.KubernetesClientException;
 import io.fabric8.kubernetes.client.LocalPortForward;
 import io.fabric8.kubernetes.client.dsl.Listable;
 import io.fabric8.kubernetes.client.dsl.base.OperationSupport;
@@ -43,7 +43,7 @@ public class FabricConnector extends AbstractHelmJConnector<FabricConnectorConfi
 	}
 
 	@Override
-	public SocketForwarderConnection openSocketConnection() {
+	public SocketForwarderConnection openConnection() {
 		DefaultKubernetesClient kubernetesClient = new DefaultKubernetesClient(getConfiguration().getConfig());
 		try {
 			final OkHttpClient httpClient = kubernetesClient.getHttpClient();
@@ -81,7 +81,7 @@ public class FabricConnector extends AbstractHelmJConnector<FabricConnectorConfi
 				}
 			}
 		} catch (MalformedURLException e) {
-			KubernetesClientException.launderThrowable(e);
+			throw new HelmJConnectorException("An error has occurred." + e.getMessage());
 		}
 		return null;
 	}

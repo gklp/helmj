@@ -21,7 +21,7 @@ public class HelmJTiller {
 	}
 
 	public ReleaseServiceGrpc.ReleaseServiceBlockingStub getReleaseServiceBlockingStub() {
-		SocketForwarderConnection tillerConnectionDetail = this.helmJConnector.openSocketConnection();
+		SocketForwarderConnection tillerConnectionDetail = this.helmJConnector.openConnection();
 		if (tillerConnectionDetail != null) {
 			String hostName = tillerConnectionDetail.getInetAddress().getHostName();
 			int port = tillerConnectionDetail.getLocalPort();
