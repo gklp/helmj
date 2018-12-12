@@ -14,11 +14,11 @@ public class ConnectorSupplier<T extends AbstractHelmJConnector> {
 	}
 
 	public static AbstractHelmJConnector getFabricConnector(ClientConfig clientConfig) {
-		if ("fabric".equalsIgnoreCase(clientConfig.getConnectorType())) {
+		if ("io.fabric8.kubernetes".equalsIgnoreCase(clientConfig.getConnectorType())) {
 			ConnectorSupplier<FabricConnector> fabricConnectorSupplier = new ConnectorSupplier<>(FabricConnector::new);
 			return fabricConnectorSupplier.getConnectorSupplier();
 		}
-		throw new HelmJConnectorException("Unsupported client type : " + clientConfig.getConnectorType());
+		throw new HelmJConnectorException("Unsupported connector type : " + clientConfig.getConnectorType());
 	}
 
 	private T getConnectorSupplier() {
